@@ -1,0 +1,78 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para cada tarjeta de negocio */
+  .businessItem {
+    list-style-type: none;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #d5c569;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .businessItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Imagen del negocio */
+  .businessItem img {
+    width: 100%;
+    height: 220px; /* Tamaño fijo para todas las imágenes */
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    object-position: center;
+  }
+  
+  /* Información del restaurante en columna */
+  .restInfo {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+    text-align: center; /* Centrar el contenido */
+  }
+  
+  .restInfo h3 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+  }
+  
+  .restInfo p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .info-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+  }
+
+  .left-side-info {
+    text-align: left;
+  }
+
+  .rigth-side-info {
+    text-align: right;
+  }
+
+  .orange-bold-text {
+    color: orangered;
+    font-weight: bold;
+  }
+  
+  /* Estilos para el listado de tarjetas */
+  #businessList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Ajusta el tamaño para que las tarjetas sean más grandes */
+    gap: 2rem;
+    padding: 4rem;
+  }
