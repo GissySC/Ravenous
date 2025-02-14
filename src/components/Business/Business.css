@@ -8,8 +8,8 @@
   /* Estilos para cada tarjeta de negocio */
   .businessItem {
     list-style-type: none;
+
     margin: 1rem;
-    padding: 1rem;
     background-color: #d5c569;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -60,7 +60,7 @@
     text-align: left;
   }
 
-  .rigth-side-info {
+  .right-side-info {
     text-align: right;
   }
 
@@ -69,10 +69,3 @@
     font-weight: bold;
   }
   
-  /* Estilos para el listado de tarjetas */
-  #businessList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Ajusta el tamaño para que las tarjetas sean más grandes */
-    gap: 2rem;
-    padding: 4rem;
-  }

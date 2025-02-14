@@ -36,6 +36,13 @@
     color: #2c2c2c; 
     font-weight: bold;
   }
+
+  #sorting-options button.active {
+    background-color: #ffd700;
+    color: #2c2c2c;
+    font-weight: bold;
+    border: 2px solid #e6b800;
+}
   
   /* Form inputs styling */
   #sbinputs {
