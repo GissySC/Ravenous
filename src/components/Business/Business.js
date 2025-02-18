@@ -5,25 +5,22 @@ import './Business.css';
 function Business({ business }) {
     return (
         <div className='businessItem'>
-            <img src={business.imageSrc} alt={business.name} />
+            <img src={business.image_url} alt={business.name} />
             <div className='restInfo'>
                 <h3>{business.name}</h3>
                 <div className='info-container'>
                     <p className='left-side-info'>
-                        {business.address}
+                        {business.location.address1}
                         <br/>
-                        {business.state}
-                        <br/>
-                        {business.zipCode}, {business.city}
+                        {business.location.zip_code}, {business.location.city}
                     </p>
                     <p className='right-side-info'>
                         <span className='orange-bold-text'>
-                        {business.category}
+                        {business.categories?.[0]?.title || ''} 
                         <br/>
                         {business.rating} ⭐                      
                         </span>
-                        <br/>
-                        {business.reviewCount} reviews
+                        ({business.review_count})
                     </p>
                 </div>
             </div>

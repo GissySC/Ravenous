@@ -1,18 +1,39 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [location, setLocation] = useState('');
-    const [sortBy, setSortBy] = useState('Best Match');
+    const [sortBy, setSortBy] = useState('best_match');
+
+    const toTitleCase = (text) => {
+        if (!text || typeof text !== 'string') return '';
+        return text 
+        .toLowerCase()
+        .split(' ')
+            .map(words => words.charAt(0).toUpperCase() + words.slice(1))
+            .join(' ');
+        
+    };
 
     const handleSelectedSorting = (event) => {
-        setSortBy(event.target.value);
-    }
+        const newSortBy = event.target.getAttribute('data-value');
+        setSortBy(newSortBy);
+        if (searchTerm && location) {
+            onSearch(searchTerm, location, newSortBy);
+        }
+    }; 
+        
 
     const handleSearch = (event) => {
         event.preventDefault();
-        console.log(`Searching Yelp with ${searchTerm}, ${location}, ${sortBy}`)
+
+        if (!searchTerm || !location) {
+            alert("Por favor, ingresa un término de búsqueda y una ubicación");
+            return;
+        }
+
+        onSearch(searchTerm, location, sortBy);
     }
 
     return (
@@ -21,15 +42,20 @@ function SearchBar() {
                 <h1>ravenous</h1>
             </div>
             <section id='sorting-options'>
-                {['Best Match', 'Highest Rated', 'Most Reviewed'].map((option) => (
+                {[
+                    { label: 'Best Match', value: 'best_match'},
+                    { label: 'Highest Rated', value: 'rating'},
+                    { label: 'Most Reviewed', value: 'review_count'}
+
+                ].map((option) => (
                     <button 
-                        key={option}
+                        key={option.value}
                         type="button"
-                        value={option}
+                        data-value={option.value}
                         onClick={handleSelectedSorting}
-                        className={sortBy === option ? 'active' : ''}
+                        className={sortBy === option.value ? 'active' : ''}
                     >
-                        {option}
+                        {option.label}
                     </button>
                 ))}
             </section>
@@ -39,17 +65,17 @@ function SearchBar() {
                     type='text' 
                     id='userterms' 
                     name='userterms' 
-                    placeholder='Asian food'   
+                    placeholder='Ejemplo: Sushi, Pizza, Brunch...'   
                     value={searchTerm} 
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(toTitleCase(e.target.value))}
                 />                       
                 <input 
                     type='text' 
                     id='location' 
                     name='location' 
-                    placeholder='Barcelona'  
+                    placeholder='Ejemplo: Barcelona, Londres, Paris...'  
                     value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    onChange={(e) => setLocation(toTitleCase(e.target.value))}
                 />
 
                 <input type='submit' value="Let's Go" />
