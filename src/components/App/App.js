@@ -2,16 +2,26 @@ import React, { useState } from 'react';
 import './App.css';
 import BusinessList from '../BusinessList/BusinessList.js';
 import SearchBar from '../SearchBar/SearchBar.js';
-import searchBusinesses from '/Gissela/Documentos/Web Dev/Practice/Ravenous/ravenousapp/src/utils/Yelp.js';
 
 
 function App() {
   const [businesses, setBusinesses] = useState([]);
 
   const handleSearch = async (searchTerm, location, sortBy) => {
-    const results = await searchBusinesses(searchTerm, location, sortBy);
-    setBusinesses(results || []);
-  }
+    try {
+      const response = await fetch(
+        `/.netlify/functions/Yelp?searchTerm=${searchTerm}&location=${location}&sortBy=${sortBy}`
+      );
+      if (!response.ok) {
+      throw new Error(`Error en la petición: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setBusinesses(data || []);
+    } catch (error) {
+      console.error("Error al obtener los datos de Yelp:", error);
+    }
+  };
 
   return (
     <div className="App">

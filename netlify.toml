@@ -1,0 +1,7 @@
+[build]
+functions = "netlify/functions"
+
+[dev]
+    framework = "#custom"
+    command = "npm run start"
+    targetPort = 3000
